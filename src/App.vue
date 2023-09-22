@@ -4,14 +4,13 @@
     <h1>{{ header || 'Welcome' }}</h1>
 
     <div class="add-item-form">
-      <input @keyup.enter="items.push({ id: items.length + 1, label: newItem })" v-model="newItem" type="text"
-        placeholder="Add an item">
+      <input @keyup.enter="saveItem" v-model="newItem" type="text" placeholder="Add an item">
 
       <label>
         <input type="checkbox" v-model="newItemHighPriority">High Priority
       </label>
 
-      <button @click="items.push({ id: items.length + 1, label: newItem })" class="btn btn-primary">
+      <button @click="saveItem" class="btn btn-primary">
         Save Item
       </button>
     </div>
@@ -36,6 +35,12 @@ export default {
         { id: 2, label: "2 board games" },
         { id: 3, label: "20 cups" },
       ]
+    }
+  },
+  methods: {
+    saveItem() {
+      this.items.push({ id: this.items.length + 1, label: this.newItem })
+      this.newItem = ""
     }
   }
 }
