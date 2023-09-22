@@ -1,10 +1,25 @@
 <template>
   <div id="shopping-list">
+
     <h1>{{ header || 'Welcome' }}</h1>
+
+    <div class="add-item-form">
+      <input @keyup.enter="items.push({ id: items.length + 1, label: newItem })" v-model="newItem" type="text"
+        placeholder="Add an item">
+
+      <label>
+        <input type="checkbox" v-model="newItemHighPriority">High Priority
+      </label>
+
+      <button @click="items.push({ id: items.length + 1, label: newItem })" class="btn btn-primary">
+        Save Item
+      </button>
+    </div>
 
     <ul>
       <li v-for="item in items" :key="item.id">{{ item.label }}</li>
     </ul>
+
   </div>
 </template>
 
@@ -14,6 +29,8 @@ export default {
   data() {
     return {
       header: 'Shopping List App',
+      newItem: '',
+      newItemHighPriority: false,
       items: [
         { id: 1, label: "10 party hats" },
         { id: 2, label: "2 board games" },
