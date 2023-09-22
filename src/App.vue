@@ -22,7 +22,7 @@
     <p v-if="items.length === 0">Good job! You completed the shopping list.</p>
 
     <ul>
-      <li v-for="item in items" @click="togglePurchased(item)" :key="item.id"
+      <li v-for="item in reversedItems" @click="togglePurchased(item)" :key="item.id"
         :class="{ strikeout: item.purchased, priority: item.highPriority }">
         {{ item.label }}
       </li>
@@ -45,6 +45,11 @@ export default {
         { id: 2, label: "2 board games", purchased: true, highPriority: false },
         { id: 3, label: "20 cups", purchased: false, highPriority: true },
       ]
+    }
+  },
+  computed: {
+    reversedItems() {
+      return [...this.items].reverse()
     }
   },
   methods: {
